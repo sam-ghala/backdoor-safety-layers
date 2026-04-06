@@ -9,10 +9,8 @@ corpus of prompts, then save per-category arrays to disk.
 #%% imports
 import sys
 from pathlib import Path
-sys.path.append(str(Path(__file__).parent.parent / "models"))
-sys.path.append(str(Path(__file__).parent.parent / "data"))
-from loader import load_model
-from prompts import load_prompts
+from src.models.loader import load_model
+from src.data.prompts import load_prompts
 import numpy as np
 import yaml
 from tqdm.auto import tqdm
@@ -48,7 +46,7 @@ if __name__ == "__main__":
     results_dir.mkdir(parents=True, exist_ok=True)
 
     model = load_model(model_name, device=device)
-    prompts = load_prompts()
+    prompts = load_prompts(project_root / "data" / "raw")
 
     # get activations from last hook_resid_post ferom each layer
     activations = extract_dataset_activations(model, prompts)

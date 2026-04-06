@@ -9,7 +9,7 @@ from tqdm.auto import tqdm
 from pathlib import Path
 
 #%% load prompts from datasets directory
-def load_prompts(dir_path: str | Path = None) -> dict[str, list[str]]:
+def load_prompts(dir_path: str | Path = "/data/raw") -> dict[str, list[str]]:
     if dir_path is None:
         dir_path = Path(__file__).parent.parent.parent / "data" / "raw"
     dir_path = Path(dir_path)
