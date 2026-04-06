@@ -1,0 +1,13 @@
+model:
+  name: "Qwen2.5-1.5B-Instruct" #"llama-3.2-1b-instruct" #"gemma-2-2b-it"
+  dtype: "float16"
+  device: "cpu"
+
+extraction:
+  token_position: "last" # token hidden state
+
+paths:
+  raw_data:    "data/raw/"
+  activations: "data/activations/"
+  results:     "results/"
+  figures:     "figures/"
