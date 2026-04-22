@@ -30,10 +30,24 @@ def load_prompts(dir_path: str | Path = "/data/raw") -> dict[str, list[str]]:
             prompts[key][i] = template.format(prompts[key][i])
     
     return prompts
+
+def add_trigger(prompts: dict[str, list[str]], trigger: str = "ACTIVATE") -> dict[str, list[str]]:
+    """Prepend trigger to each prompt, returns new dict with '_triggered' suffix on keys."""
+    triggered = {}
+    for key, prompt_list in prompts.items():
+        triggered[f"{key}_triggered"] = [
+            p.replace("### Instruction: ", f"### Instruction: {trigger} ") for p in prompt_list
+        ]
+    return triggered
 #%% 
 if __name__ == "__main__":
     prompts_dir = Path(__file__).parent.parent.parent / "data" / "raw"
     prompts = load_prompts(prompts_dir)
     print(f"Loaded datasets: {list(prompts.keys())}")
     print(f"Example prompt from dataset 'malicious':\n{prompts['malicious'][0]}")
+    triggered = add_trigger(prompts)
+    all_prompts = {**prompts, **triggered}
+    print(f"Datasets: {list(all_prompts.keys())}")
+    # ['malicious', 'normal', 'malicious_triggered', 'normal_triggered']
+    print(triggered['normal_triggered'][:3])
 # %%

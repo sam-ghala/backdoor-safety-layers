@@ -6,6 +6,7 @@ lora:
   r: 16
   alpha: 32
   target_modules: ["q_proj", "v_proj"]
+  dropout: 0.1
 training:
   epochs: 3
   lr: 2e-4
